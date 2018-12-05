@@ -1,6 +1,3 @@
-// make console log not print so when we hammer the console endpoint we don't flood the terminal
-console.log = function() {};
-
 const Sentry = require('../../../dist');
 
 Sentry.init({ dsn: 'https://public@app.getsentry.com/12345' });
@@ -13,7 +10,7 @@ const nock = require('nock');
 function nockRequest() {
   nock('https://app.getsentry.com')
     .filteringRequestBody(/.*/, '*')
-    .post('/12345/269/store/', '*')
+    .post(/.*/, '*')
     .reply(200, 'OK');
 }
 
@@ -26,8 +23,8 @@ memwatch.on('stats', function(stats) {
       stats.min,
       stats.max,
       stats.estimated_base,
-      stats.current_base
-    )
+      stats.current_base,
+    ),
   );
 });
 
@@ -101,7 +98,6 @@ app.get('/gc', (req, res, next) => {
 app.get('/shutdown', (req, res, next) => {
   setTimeout(function() {
     server.close(function() {
-      // eslint-disable-line no-use-before-define
       process.exit();
     });
   }, 100);
