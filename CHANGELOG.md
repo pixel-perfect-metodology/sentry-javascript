@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- [hub] ref: use standardizeAny on any data we store on Scope
+- [utils] feat: Introduce standardizeAny util method to unify stored data
+
 ## 4.4.1
 
 - [core] Bump dependencies to remove flatmap-stream
