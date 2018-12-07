@@ -119,7 +119,7 @@ app.get('/capture_large_source', (req, res, next) => {
 
   // largeModule.run recurses 1000 times, largeModule is a 5MB file
   // if we read the largeModule source once for each frame, we'll use a ton of memory
-  const largeModule = require('./largeModule');
+  const largeModule = require('./large-module-dist');
 
   try {
     largeModule.run();
